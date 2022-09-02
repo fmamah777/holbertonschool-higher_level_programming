@@ -1,23 +1,17 @@
 #!/usr/bin/python3
+
+
+def validate_index(tuple, idx):
+    try:
+        return tuple[idx]
+    except:
+        return 0
+
+
 def add_tuple(tuple_a=(), tuple_b=()):
-    if len(tuple_a) > 2 or len(tuple_b) > 2:
-        tuple_a = tuple_a[:2]
-        tuple_b = tuple_b[:2]
+    n1 = validate_index(tuple_a, 0)
+    n2 = validate_index(tuple_b, 0)
 
-    my_list = [tuple(iterable) for iterable in (tuple_a, tuple_b)]
-    if len(my_list) == 0:
-        return ()
-    while len(my_list) < 4:
-
-        if len(my_list[0]) > len(my_list[1]):
-            my_list[1] = my_list[1] + (0,) * \
-                (len(my_list[0]) - len(my_list[1]))
-
-        elif len(my_list[1]) > len(my_list[0]):
-            my_list[0] = my_list[0] + (0,) * \
-                (len(my_list[1]) - len(my_list[0]))
-
-        sum = (my_list[0][0] + my_list[1][0],
-               my_list[0][1] + my_list[1][1])
-
-        return(tuple(sum))
+    n3 = validate_index(tuple_a, 1)
+    n4 = validate_index(tuple_b, 1)
+    return n1 + n2, n3 + n4
