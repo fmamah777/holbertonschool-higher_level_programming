@@ -1,35 +1,71 @@
-# doctest_4-print_square.txt
+=============================
+How to Use 4-print_square.txt
+=============================
+This library contains test cases for the print_square() function.
 
-Importing function from module:
-    >>> print_square = __import__("4-print_square").print_square
+>>> print_square = __import__("4-print_square").print_square
 
-Size is integer above 0:
-    >>> print_square(5)
-    #####
-    #####
-    #####
-    #####
-    #####
+Test Cases
+==========
+>>> print_square(4)
+####
+####
+####
+####
 
-Size is integer equal to 0:
-    >>> print_square(0)
+>>> print_square(10)
+##########
+##########
+##########
+##########
+##########
+##########
+##########
+##########
+##########
+##########
 
-Size is integer less than 0:
-    >>> print_square(-1)
-    Traceback (most recent call last):
-    ValueError: size must be >= 0
+>>> print_square(0)
 
-Size is float less than 0:
-    >>> print_square(-0.5)
-    Traceback (most recent call last):
-    TypeError: size must be an integer
+>>> print_square(1)
+#
 
-Size is not an integer:
-    >>> print_square("Noice!")
-    Traceback (most recent call last):
-    TypeError: size must be an integer
+>>> print_square(-1)
+Traceback (most recent call last):
+ValueError: size must be >= 0
 
-Running missing argument:
-    >>> print_square()
-    Traceback (most recent call last):
-    TypeError: print_square() missing 1 required positional argument: 'size'
+>>> print_square("Juan")
+Traceback (most recent call last):
+TypeError: size must be an integer
+
+>>> print_square("")
+Traceback (most recent call last):
+TypeError: size must be an integer
+
+>>> print_square(66.6)
+Traceback (most recent call last):
+TypeError: size must be an integer
+
+>>> print_square(-66.6)
+Traceback (most recent call last):
+TypeError: size must be an integer
+
+>>> print_square('J')
+Traceback (most recent call last):
+TypeError: size must be an integer
+
+>>> print_square((1, 2, 3))
+Traceback (most recent call last):
+TypeError: size must be an integer
+
+>>> print_square([4, 5, 6])
+Traceback (most recent call last):
+TypeError: size must be an integer
+
+>>> print_square(6BJSP)
+Traceback (most recent call last):
+SyntaxError: invalid syntax
+
+>>> print_square()
+Traceback (most recent call last):
+TypeError: print_square() missing 1 required positional argument: 'size'
