@@ -1,20 +1,21 @@
 #!/usr/bin/python3
 """
-This module is used to add an integer.
+Fuction that adds 2 integers, must be an int or float
+python3 -c 'print(__import__("my_module").__doc__)'
+python3 -c 'print(__import__("my_module").my_function.__doc__)'
 """
+
+
 def add_integer(a, b=98):
     """
-    This function adds two integers together and returns a result.
-    It takes integers or floats as arguments.
-    If a float passes through than it takes that argument and turns it
-    into an integer.
+    add_integer - takes 2 args, must be int or float
+    a: int 1
+    b: int 2
+    return: int: python3 -c 'print(__import__("my_module").__doc__)'
     """
-    if type(a) is float:
-        a = int(a)
-    if type(b) is float:
-        b = int(b)
-    if type(a) is not int:
+
+    if isinstance(a, (int, float)) is False:
         raise TypeError("a must be an integer")
-    if type(b) is not int:
+    elif isinstance(b, (int, float)) is False:
         raise TypeError("b must be an integer")
-    return a + b
+    return int(a) + int(b)
