@@ -1,0 +1,105 @@
+=======================================
+Unit test for module 7-base_geometry.py
+=======================================
+
+Import module
+=============
+    >>> BaseGeometry = __import__("7-base_geometry").BaseGeometry
+
+Check for module & class docstring:
+===================================
+    >>> doc = __import__("7-base_geometry").__doc__
+    >>> len(doc) > 1
+    True
+
+    >>> doc = __import__("7-base_geometry").BaseGeometry.__doc__
+    >>> len(doc) > 1
+    True
+
+Creation of BaseGeometry object:
+================================
+    >>> base_geometry = BaseGeometry()
+
+Testing base_geometry.area():
+=============================
+    ||| used properly |||
+    >>> base_geometry.area()
+    Traceback (most recent call last):
+    Exception: area() is not implemented
+
+    ||| used improperly |||
+    - passing arguments -
+    >>> base_geometry.area(12)
+    Traceback (most recent call last):
+    TypeError: area() takes 1 positional argument but 2 were given
+
+Testing base_geometry.integer_validator:
+========================================
+    ||| used properly |||
+    >>> base_geometry.integer_validator("Age", 12)
+    >>> base_geometry.integer_validator(12, 12)
+    >>> base_geometry.integer_validator("Int", 100)
+
+    ||| used improperly |||
+    - value is not int -
+    >>> base_geometry.integer_validator("String", "twelve")
+    Traceback (most recent call last):
+    TypeError: String must be an integer
+
+    >>> base_geometry.integer_validator("List", [1, 2, 3])
+    Traceback (most recent call last):
+    TypeError: List must be an integer
+
+    >>> base_geometry.integer_validator("Tuple", (1, 2))
+    Traceback (most recent call last):
+    TypeError: Tuple must be an integer
+
+    >>> base_geometry.integer_validator("Boolean", True)
+    Traceback (most recent call last):
+    TypeError: Boolean must be an integer
+
+    >>> base_geometry.integer_validator("Float", 1.2)
+    Traceback (most recent call last):
+    TypeError: Float must be an integer
+
+    >>> base_geometry.integer_validator("NaN", float('nan'))
+    Traceback (most recent call last):
+    TypeError: NaN must be an integer
+
+    >>> base_geometry.integer_validator("Inf", float('inf'))
+    Traceback (most recent call last):
+    TypeError: Inf must be an integer
+
+    >>> base_geometry.integer_validator("Age", {3, 4})
+    Traceback (most recent call last):
+    TypeError: Age must be an integer
+
+    >>> base_geometry.integer_validator("Age", None)
+    Traceback (most recent call last):
+    TypeError: Age must be an integer
+
+    - value is 0 -
+    >>> base_geometry.integer_validator("Age", 0)
+    Traceback (most recent call last):
+    ValueError: Age must be greater than 0
+
+    - value is less < 0 -
+    >>> base_geometry.integer_validator("Age", -2)
+    Traceback (most recent call last):
+    ValueError: Age must be greater than 0
+
+    - only 1 argument passed -
+    >>> base_geometry.integer_validator("Age")
+    Traceback (most recent call last):
+    TypeError: integer_validator() missing 1 required positional argument: 'value'
+
+    - no arguments passed -
+    >>> base_geometry.integer_validator()
+    Traceback (most recent call last):
+    TypeError: integer_validator() missing 2 required positional arguments: 'name' and 'value'
+
+    - more than 2 arguments -
+    >>> base_geometry.integer_validator("Age", 12, 12)
+    Traceback (most recent call last):
+    ...
+    TypeError: integer_validator() takes 3 positional arguments but 4 were given
