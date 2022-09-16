@@ -1,22 +1,12 @@
-#!/usr/bin/python3
+!/usr/bin/python3
 """
-Contains the class: MyList.
-inherits from superclass: list.
+This module contains the method lookup.
 """
 
-class MyList(list):
-    """
-    This class is a subclass of list.
-    """
-    def __init__(self):
-        """
-        This method initializes the class.
-        """
-        pass
 
-    def print_sorted(self):
-        """
-        This method prints the list contained in self.
-        The data is printed in sorted (ascending) order.
-        """
-        print(sorted(self))
+def lookup(obj):
+    """
+    This method returns the list of available attributes and
+    methods of an object.
+    """
+    return dir(obj)
