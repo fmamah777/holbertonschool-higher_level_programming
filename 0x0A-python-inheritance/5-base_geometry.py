@@ -1,10 +1,11 @@
 #!/usr/bin/python3
 """
-contains class named: BaseGeometry.
+This module contains the class: BaseGeometry.
 """
 
+
 class BaseGeometry:
-    ""
-    this class is empty
+    """
+    This class is currently empty.
     """
     pass
