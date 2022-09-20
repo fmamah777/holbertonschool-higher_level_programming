@@ -1,13 +1,13 @@
 #!/usr/bin/python3
-""" 
-Returning the json format of a string, containing the json method as well. 
 """
-
+This module contains the method: to_json_string.
+"""
 import json
 
 
 def to_json_string(my_obj):
-    """ 
-    prototype to return json format. 
+    """
+    This method returns the JSON representation of an
+    object, 'my_obj'.
     """
     return json.dumps(my_obj)
