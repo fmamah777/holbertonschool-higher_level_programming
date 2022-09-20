@@ -1,25 +1,20 @@
 #!/usr/bin/python3
 """
-This module contains class: Student
+9-student.py
+Write a class Student that defines a student by
 """
 
 
 class Student:
     """
-    This class creates a Student identification object that contains; a first_name,
-    last_name, and age.
+    class student and def, nomb, apellido, age
     """
     def __init__(self, first_name, last_name, age):
-        """
-        This method initializes the object.
-        """
+        """inicialization"""
         self.first_name = first_name
         self.last_name = last_name
         self.age = age
 
     def to_json(self):
-        """
-        This method returns a dictionary representation of
-        itself.
-        """
-        return self.__dict__
+        """return a dictionary"""
+        return self.
