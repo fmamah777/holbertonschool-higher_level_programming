@@ -1,7 +1,8 @@
 #!/usr/bin/python3
-""" appending a string """
+"""append write funtion"""
 
-def append_write(filename=""):
-    """ prototype to append the end of UTF8 file """
-    with open(filename, encoding='utf-8') as f:
-        return f.write(filename)
+
+def append_write(filename="", text=""):
+    """funtion write"""
+    with open(filename, "a", encoding="utf-8") as f:
+        return f.write(text)
