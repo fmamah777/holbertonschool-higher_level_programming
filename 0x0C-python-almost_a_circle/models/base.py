@@ -1,19 +1,21 @@
 #!/usr/bin/python3
 """
-Base class
+contains the class: Base.
 """
+import json
+import os
+
 
 class Base:
-    """ This is a description of the class """
+    """
+    This class is the base for all subsequent classes that will
+    inherit from it.
+    nb_objects is a private attribute that is used to give an id
+    to an object that was created without one.
+    """
     __nb_objects = 0
-    def __init__(self, id=None):
-        if id is not None:
-            self.id = id
-        else:
-            Base.__nb_objects += 1
-            self.id = Base.__nb_objects
 
-            @classmethod
+    @classmethod
     def clear(cls):
         """
         This method resets the nb_objects.
