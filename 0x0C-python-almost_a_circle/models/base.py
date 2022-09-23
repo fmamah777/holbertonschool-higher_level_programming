@@ -1,6 +1,6 @@
 #!/usr/bin/python3
 """
-contains the class: Base.
+This module contains the class: Base.
 """
 import json
 import os
@@ -8,23 +8,23 @@ import os
 
 class Base:
     """
-    This class is the base for all subsequent classes that will
+    This class is the base for all classes that can
     inherit from it.
-    nb_objects is a private attribute that is used to give an id
-    to an object that was created without one.
+    nb_objects is a private attribute that identidies objects
+    created without one. (an i.d)
     """
     __nb_objects = 0
 
     @classmethod
     def clear(cls):
         """
-        This method resets the nb_objects.
+        resets the nb_objects.
         """
         Base.__nb_objects = 0
 
     def __init__(self, id=None):
         """
-        This method instantiates the object.
+        This method ignores the object.
         """
         if id is None:
             Base.__nb_objects += 1
@@ -35,7 +35,7 @@ class Base:
     @staticmethod
     def to_json_string(list_dictionaries):
         """
-        This method returns a JSON string representation of
+        returns JSON string representiation of
         a dictionary, 'list_dictionaries'.
         """
         if not list_dictionaries:
@@ -45,7 +45,7 @@ class Base:
     @classmethod
     def save_to_file(cls, list_objs):
         """
-        This method writes the JSON string representation of an
+        JSON string representation of an
         object, 'list_objs', to a file.
         """
         filename = cls.__name__ + ".json"
@@ -59,7 +59,7 @@ class Base:
     @staticmethod
     def from_json_string(json_string):
         """
-        This method returns the list of the JSON string, 'json_string'.
+        returns the list of the string, 'json_string'.
         """
         if not json_string:
             return []
@@ -68,7 +68,7 @@ class Base:
     @classmethod
     def create(cls, **dictionary):
         """
-        This method returns an object with the attributes set by
+        returns object set by
         kwargs, 'dictionary'.
         """
         if cls.__name__ == "Rectangle":
@@ -81,7 +81,7 @@ class Base:
     @classmethod
     def load_from_file(cls):
         """
-        This method returns a list of instances of a particular
+        returns a list of instances in a specific
         class, 'cls'.
         """
         filename = cls.__name__ + ".json"
