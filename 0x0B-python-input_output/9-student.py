@@ -1,17 +1,26 @@
 #!/usr/bin/python3
-""" 9-add_item """
-import os.path
+#!/usr/bin/python3
+"""
+script list states with 'a' in its name
+"""
 from sys import argv
-save_to_json_file = __import__('7-save_to_json_file').save_to_json_file
-load_from_json_file = __import__('8-load_from_json_file').load_from_json_file
+from sqlalchemy import create_engine
+from sqlalchemy.orm import sessionmaker
+from model_state import Base, State
 
-file = "add_item.json"
 
-json_list = []
-if os.path.exists(file):
-    json_list = load_from_json_file(file)
+if __name__ == "__main__":
+    dbengine = create_engine('mysql+mysqldb://{}:{}@localhost:3306/{}'
+                             .format(argv[1], argv[2], argv[3]),
+                             pool_pre_ping=True)
 
-for i in range(1, len(argv)):
-    json_list.append(argv[i])
+    Base.metadata.create_all(dbengine)
+    dbsess = sessionmaker(bind=dbengine)
 
-save_to_json_file(json_list, file)
+    Astates = dbsess().query(State).order_by(State.id)\
+        .filter(State.name.like("%a%"))
+
+    for row in Astates:
+        print("{}: {}".format(row.id, row.name))
+
+    dbsess().close
