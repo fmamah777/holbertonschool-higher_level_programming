@@ -1,20 +1,17 @@
 #!/usr/bin/python3
-"""
-9-student.py
-Write a class Student that defines a student by
-"""
+""" 9-add_item """
+import os.path
+from sys import argv
+save_to_json_file = __import__('7-save_to_json_file').save_to_json_file
+load_from_json_file = __import__('8-load_from_json_file').load_from_json_file
 
+file = "add_item.json"
 
-class Student:
-    """
-    class student and def, nomb, apellido, age
-    """
-    def __init__(self, first_name, last_name, age):
-        """inicialization"""
-        self.first_name = first_name
-        self.last_name = last_name
-        self.age = age
+json_list = []
+if os.path.exists(file):
+    json_list = load_from_json_file(file)
 
-    def to_json(self):
-        """return a dictionary"""
-        return self.
+for i in range(1, len(argv)):
+    json_list.append(argv[i])
+
+save_to_json_file(json_list, file)
