@@ -1,5 +1,5 @@
 #!/usr/bin/python3
-""" Rectangle Class """
+""" Rectangle class """
 from models.base import Base
 
 
@@ -7,7 +7,7 @@ class Rectangle(Base):
     """ Rectangle inherits from Base """
 
     def __init__(self, width, height, x=0, y=0, id=None):
-        """ Init a Rectangle() """
+        """ Initializes/ init  Rectangle() """
         self.width = width
         self.height = height
         self.x = x
@@ -15,12 +15,12 @@ class Rectangle(Base):
         super().__init__(id)
 
     def __str__(self):
-        """ Print a Rectangle() """
+        """ Prints Rectangle() """
         return '[Rectangle] ({}) {}/{} - {}/{}'.format(
                 self.id, self.__x, self.__y, self.__width, self.__height)
 
     def integer_validator(self, name, value):
-        """ Validate value """
+        """ Validator """
         if type(value) is not int:
             raise TypeError('{} must be an integer'.format(name))
         if value <= 0 and name in ['width', 'height']:
@@ -30,59 +30,59 @@ class Rectangle(Base):
 
     @property
     def width(self):
-        """  Get the width """
+        """  method gets the  width """
         return self.__width
 
     @width.setter
     def width(self, value):
-        """ Set the width """
+        """ method sets the width """
         self.integer_validator('width', value)
         self.__width = value
 
     @property
     def height(self):
-        """  Get the height """
+        """  method get the height """
         return self.__height
 
     @height.setter
     def height(self, value):
-        """ Set the height """
+        """ function sets the height """
         self.integer_validator('height', value)
         self.__height = value
 
     @property
     def x(self):
-        """ Get x """
+        """ this function is to get x """
         return self.__x
 
     @x.setter
     def x(self, value):
-        """ Set x """
+        """ this function is to set x """
         self.integer_validator('x', value)
         self.__x = value
 
     @property
     def y(self):
-        """ Get y """
+        """ this method is to get y """
         return self.__y
 
     @y.setter
     def y(self, value):
-        """ Set y """
+        """ method to set y """
         self.integer_validator('y', value)
         self.__y = value
 
     def area(self):
-        """ Get Area """
+        """ method used to get Area """
         return self.__width * self.__height
 
     def display(self):
-        """ Display Rectangle """
+        """ method to display rectangle """
         print('\n' * self.__y + (' ' * self.__x + '#' * self.__width + '\n') *
               self.__height, end='')
 
     def __update(self, id=None, width=None, height=None, x=None, y=None):
-        """ Internal method to facilitate update() """
+        """ method performs update() """
         if id is not None:
             self.id = id
         if width is not None:
@@ -95,7 +95,7 @@ class Rectangle(Base):
             self.y = y
 
     def update(self, *args, **kwargs):
-        """ Updates instance attributes """
+        """  attributes are updated """
         # print(args, kwargs)
         if args:
             self.__update(*args)
@@ -103,6 +103,6 @@ class Rectangle(Base):
             self.__update(**kwargs)
 
     def to_dictionary(self):
-        """ creates a dict of the class """
+        """ creates a dictionary of a class """
         return {"id": self.id, "width": self.width,
                 "height": self.height, "x": self.x, "y": self.y}

@@ -1,22 +1,22 @@
 #!/usr/bin/python3
-""" Square Class """
+""" class for square """
 from models.rectangle import Rectangle
 
 
 class Square(Rectangle):
-    """ Square Class inherits from Rectangle """
+    """ class inherits from rectangle """
     def __init__(self, size, x=0, y=0, id=None):
-        """ Init a Square """
+        """ Init/initialize  square """
         super().__init__(size, size, x, y, id)
 
     def __str__(self):
-        """ Print attributes """
+        """ function prints attributes """
         return '[{}] ({}) {}/{} - {}'.format(
             type(self).__name__, self.id, self.x, self.y, self.size)
 
     @property
     def size(self):
-        """ Side-length of this square."""
+        """ square side length """
         return self.width
 
     @size.setter
@@ -25,7 +25,7 @@ class Square(Rectangle):
         self.height = value
 
     def __update(self, id=None, size=None, x=None, y=None):
-        """ Internal method to facilitate update() """
+        """ update method () """
         if id is not None:
             self.id = id
         if size is not None:
@@ -36,13 +36,13 @@ class Square(Rectangle):
             self.y = y
 
     def update(self, *args, **kwargs):
-        """ Updates Instance attributes """
+        """ Updates Instance """
         if args:
             self.__update(*args)
         elif kwargs:
             self.__update(**kwargs)
 
     def to_dictionary(self):
-        """ Returns a __dict__ for this class """
+        """ __dict__ in return """
         return {"id": self.id, "size": self.width,
                 "x": self.x, "y": self.y}
