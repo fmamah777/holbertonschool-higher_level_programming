@@ -1,4 +1,4 @@
-- finds tv shows and groups them in a particular list
+-- finds tv shows and groups them in a particular list
 SELECT tv_genres.name AS genre,
 COUNT(tv_show_genres.genre_id) AS number_of_shows
     FROM tv_genres
