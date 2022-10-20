@@ -1,24 +1,35 @@
 #!/usr/bin/python3
 """
-List all cities and corresponding states of given database where name matches arguments
+This python script lists all cities from hbtn_0e_4_usa database
 """
+
+
 import MySQLdb
 
 
-if __name__ == "__main__":
-    from sys import argv
-    dbconnect = MySQLdb.connect(host="localhost", port=3306, user=argv[1],
-                             passwd=argv[2], database=argv[3])
+def select_state():
+    """
+    This method lists all the cities from hbtn_0e_4_usa database
+    """
+    import sys
+    db = MySQLdb.connect(host="localhost", port=3306, user=sys.argv[1],
+                         passwd=sys.argv[2], database=sys.argv[3])
 
-    cursor = dbconnect.cursor()
+    cur = db.cursor()
 
-    cursor.execute("""
-        SELECT cities.id, cities.name, states.name
-        FROM cities JOIN states ON cities.state_id = states.id
-        ORDER BY cities.id ASC""")
+    cur.execute("SELECT cities.id, cities.name, states.name\
+                    FROM cities, states\
+                    WHERE cities.state_id = states.id\
+                    ORDER BY cities.id")
 
-    for row in cursor.fetchall():
+    rows = cur.fetchall()
+
+    for row in rows:
         print(row)
 
-    cursor.close()
-    dbconnect.close()
+    cur.close()
+    db.close()
+
+
+if __name__ == "__main__":
+    select_state()

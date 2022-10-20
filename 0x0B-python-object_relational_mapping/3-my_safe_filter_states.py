@@ -1,25 +1,37 @@
 #!/usr/bin/python3
 """
-displays all values in given database where name matches
+This python script lists all states from the database hbtn_0e_0_usa
+that equal the state name that was passed
 """
+
+
 import MySQLdb
 
 
-if __name__ == "__main__":
-    from sys import argv
-    dbconnect = MySQLdb.connect(host="localhost", port=3306, user=argv[1],
-                             passwd=argv[2], database=argv[3])
+def select_state():
+    """
+    This method lists all the states in the table that start with
+    the given state name
+    """
+    import sys
+    db = MySQLdb.connect(host="localhost", port=3306, user=sys.argv[1],
+                         passwd=sys.argv[2], database=sys.argv[3])
 
-    cursor = dbconnect.cursor()
+    cur = db.cursor()
 
-    cursor.execute("""
-        SELECT * FROM states
-        WHERE name LIKE BINARY '{}'
-        ORDER BY states.id ASC
-        """.format(argv[4].split()[0]))
+    state = sys.argv[4]
 
-    for row in cursor.fetchall():
+    cur.execute("SELECT * FROM states WHERE name LIKE binary\
+                %(name)s ORDER BY id", {'name': state})
+    rows = cur.fetchall()
+    if rows is None:
+        return False
+    for row in rows:
         print(row)
 
-    cursor.close()
-    dbconnect.close()
+    cur.close()
+    db.close()
+
+
+if __name__ == "__main__":
+    select_state()
