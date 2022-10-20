@@ -1,22 +1,19 @@
 #!/usr/bin/python3
-"""
-script lists all State objects from the database
-"""
-from sys import argv
-from sqlalchemy import create_engine
-from sqlalchemy.orm import sessionmaker
-from model_state import Base, State
+""" lists all State objects from hbtn_0e_6_usa """
 
+from model_state import State, Base
+from sqlalchemy import create_engine, Table, Integer, String, Column
+from sqlalchemy.orm import sessionmaker
+from sys import argv
 
 if __name__ == "__main__":
-    dbengine = create_engine('mysql+mysqldb://{}:{}@localhost:3306/{}'
-                             .format(argv[1], argv[2], argv[3]),
-                             pool_pre_ping=True)
 
-    Base.metadata.create_all(dbengine)
-    dbsess = sessionmaker(bind=dbengine)
+    engine = create_engine('mysql+mysqldb://{}:{}@localhost/{}'
+                           .format(argv[1], argv[2], argv[3]),
+                           pool_pre_ping=True)
+    Base.metadata.create_all(engine)
+    Session = sessionmaker(bind=engine)
+    session = Session()
 
-    for row in dbsession().query(State).order_by(State.id):
-        print("{}: {}".format(row.id, row.name))
-
-    dbsess().close
+    for state in session.query(State):
+        print("{}: {}".format(state.id, state.name))
