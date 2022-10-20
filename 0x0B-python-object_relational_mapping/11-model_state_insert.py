@@ -1,6 +1,4 @@
 #!/usr/bin/python3
-# -*- coding: utf-8 -*-
-
 """
 a script that lists all State objects that contain the letter a from the DB hbtn_0e_6_usa
 """
