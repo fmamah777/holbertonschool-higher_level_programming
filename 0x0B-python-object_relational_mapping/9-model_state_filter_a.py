@@ -1,26 +1,22 @@
 #!/usr/bin/python3
-#!/usr/bin/python3
 """
-script list states with 'a' in its name
+This python script lists all states that contain 'a' from hbtn_0e_6_usa
 """
-from sys import argv
-from sqlalchemy import create_engine
-from sqlalchemy.orm import sessionmaker
-from model_state import Base, State
 
+
+import sys
+from model_state import Base, State
+from sqlalchemy.orm import sessionmaker
+
+from sqlalchemy import (create_engine)
 
 if __name__ == "__main__":
-    dbengine = create_engine('mysql+mysqldb://{}:{}@localhost:3306/{}'
-                             .format(argv[1], argv[2], argv[3]),
-                             pool_pre_ping=True)
-
-    Base.metadata.create_all(dbengine)
-    dbsess = sessionmaker(bind=dbengine)
-
-    Astates = dbsess().query(State).order_by(State.id)\
-        .filter(State.name.like("%a%"))
-
-    for row in Astates:
-        print("{}: {}".format(row.id, row.name))
-
-    dbsess().close
+    engine = create_engine('mysql+mysqldb://{}:{}@localhost/{}'
+                           .format(sys.argv[1], sys.argv[2], sys.argv[3]),
+                           pool_pre_ping=True)
+    Base.metadata.create_all(engine)
+    Session = sessionmaker(bind=engine)
+    session = Session()
+    for id, name in session.query(State.id, State.
+                                  name).filter(State.name.contains("a")):
+        print("{}: {}".format(id, name))
