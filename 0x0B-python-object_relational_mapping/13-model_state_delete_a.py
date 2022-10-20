@@ -1,17 +1,25 @@
 #!/usr/bin/python3
 """
-contains city class
+script deletes all states with given argument
 """
-from sqlalchemy import Column, ForeignKey, Integer, String
-from model_state import Base
+from sys import argv
+from sqlalchemy import create_engine
+from sqlalchemy.orm import sessionmaker
+from model_state import Base, State
 
 
-class City(Base):
-    """
-    class city that contains the cities
-    """
-    __tablename__ = 'cities'
-    id = Column(Integer, primary_key=True, nullable=False)
-    name = Column(String(128), nullable=False)
-    state_id = Column(Integer, ForeignKey("states.id"), nullable=False)
+if __name__ == "__main__":
+    dbengine = create_engine('mysql+mysqldb://{}:{}@localhost:3306/{}'
+                             .format(argv[1], argv[2], argv[3]),
+                             pool_pre_ping=True)
 
+    Base.metadata.create_all(dbengine)
+    dbsess = sessionmaker(bind=dbengine)
+    dbs = dbsess()
+
+    delm = dbs.query(State).filter(State.name.like('%a%'))
+    for row in delm:
+        dbs.delete(row)
+    dbs.commit()
+
+    dbsess().close
