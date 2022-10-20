@@ -1,27 +1,25 @@
 #!/usr/bin/python3
 """
-a script that lists all State objects that contain the letter a from the DB hbtn_0e_6_usa
+script adds new state to database
 """
+from sys import argv
+from sqlalchemy import create_engine
+from sqlalchemy.orm import sessionmaker
+from model_state import Base, State
 
-if __name__ == '__main__':
 
-    import sys
-    import sqlalchemy
-    from sys import argv
-    from sqlalchemy.orm import sessionmaker
-    from model_state import Base, State
-    from sqlalchemy.orm import Session
-    from sqlalchemy import create_engine
+if __name__ == "__main__":
+    dbengine = create_engine('mysql+mysqldb://{}:{}@localhost:3306/{}'
+                             .format(argv[1], argv[2], argv[3]),
+                             pool_pre_ping=True)
 
-    vtech = \
-        create_engine('mysql+mysqldb://{}:{}@localhost/{}'.format(sys.argv[1],
-                      sys.argv[2], sys.argv[3]), pool_pre_ping=True)
-    Base.metadata.create_all(vtech)
-    Session = sessionmaker(bind=vtech)
-    session = Session()
-    new = State(name='Louisiana')
-    session.add(new)
-    novelty_state = session.query(State).filter(State.name=='Louisiana').first()
-    session.commit()
-    print(str(novelty_state.id))
-    session.close()
+    Base.metadata.create_all(dbengine)
+    dbsess = sessionmaker(bind=dbengine)
+    dbs = dbsess()
+
+    newstate = State(name="Louisiana")
+    dbs.add(newstate)
+    dbs.commit()
+    print("{}".format(newstate.id))
+
+    dbsess().close
