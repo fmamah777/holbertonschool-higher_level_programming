@@ -1,6 +1,6 @@
 #!/usr/bin/python3
 """
-This script lists the State object from the database and matches  given name with argument
+script lists the State object from the database and matches argument
 """
 from sys import argv
 from sqlalchemy import create_engine
