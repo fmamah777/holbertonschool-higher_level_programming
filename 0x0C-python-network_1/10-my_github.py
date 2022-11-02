@@ -1,14 +1,14 @@
 #!/usr/bin/python3
 """
-Displays github ID
+Github API to call your credentials
 """
 
+if __name__ == "__main__":
 
+    import requests
+    import sys
 
-if __name__ == '__main__':
-    from requests import get
-    from requests.auth import HTTPBasicAuth
-    from sys import argv
-    requests = get('https://api.github.com/user',
-                   auth=HTTPBasicAuth(argv[1], argv[2])).json()
-    print(requests.get('id'))
+    r = requests.get(
+        "https://api.github.com/user", auth=(sys.argv[1], sys.argv[2])
+    )
+    print(r.json().get("id"))
